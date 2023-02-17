@@ -23,7 +23,10 @@ import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class Main extends Application {
-    
+    public static int port = 3000;
+    public static String protocol = "http";
+    public static String host = "localhost";
+    public static String protocolWS = "ws";
     public static void main(String[] args) {
         // Iniciar app JavaFX   
         launch(args);

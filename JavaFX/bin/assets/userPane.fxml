@@ -12,17 +12,17 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerList">
    <children>
       <SplitPane dividerPositions="0.38220551378446116" mouseTransparent="true" prefHeight="500.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                <children>
-                  <TableView prefHeight="498.0" prefWidth="275.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TableView fx:id="userTable" prefHeight="498.0" prefWidth="275.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn prefWidth="100.0" text="Name" />
-                      <TableColumn prefWidth="100.0" text="Last Name" />
-                        <TableColumn prefWidth="100.0" text="Telephone" />
+                      <TableColumn fx:id="firstNameColumn" prefWidth="100.0" text="Name" />
+                      <TableColumn fx:id="lastNameColumn" prefWidth="100.0" text="Last Name" />
+                        <TableColumn fx:id="phoneColumn" prefWidth="100.0" text="Telephone" />
                     </columns>
                   </TableView>
                </children>
