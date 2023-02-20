@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -12,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerList">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" styleClass="background" stylesheets="@DarkTheme.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerList">
    <children>
       <SplitPane dividerPositions="0.38220551378446116" mouseTransparent="true" prefHeight="500.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -20,16 +25,16 @@
                <children>
                   <TableView fx:id="userTable" prefHeight="498.0" prefWidth="275.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="firstNameColumn" prefWidth="100.0" text="Name" />
-                      <TableColumn fx:id="lastNameColumn" prefWidth="100.0" text="Last Name" />
-                        <TableColumn fx:id="phoneColumn" prefWidth="100.0" text="Telephone" />
+                      <TableColumn fx:id="firstNameColumn" prefWidth="83.0" text="Name" />
+                      <TableColumn fx:id="lastNameColumn" prefWidth="112.0" text="Last Name" />
+                        <TableColumn fx:id="phoneColumn" prefWidth="105.0" text="Telephone" />
                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="background" stylesheets="@DarkTheme.css">
                <children>
-                  <Label layoutY="6.0" text="User Details" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+                  <Label layoutY="6.0" styleClass="label-header" text="User Details" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <font>
                         <Font size="31.0" />
                      </font>
@@ -45,7 +50,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label prefHeight="31.0" prefWidth="115.0" text="First Name:">
+                        <Label prefHeight="31.0" prefWidth="115.0" styleClass="label-bright" text="First Name:">
                            <font>
                               <Font size="21.0" />
                            </font>
@@ -53,19 +58,31 @@
                               <Insets />
                            </opaqueInsets>
                         </Label>
-                        <Label prefHeight="31.0" prefWidth="115.0" text="Last Name:" GridPane.rowIndex="1">
+                        <Label prefHeight="31.0" prefWidth="115.0" styleClass="label-bright" text="Last Name:" GridPane.rowIndex="1">
                            <font>
                               <Font size="21.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="31.0" prefWidth="115.0" text="Telephone:" GridPane.rowIndex="2">
+                        <Label prefHeight="31.0" prefWidth="115.0" styleClass="label-bright" text="Telephone:" GridPane.rowIndex="2">
                            <font>
                               <Font size="21.0" />
                            </font>
                         </Label>
-                        <TextField prefHeight="25.0" prefWidth="285.0" GridPane.columnIndex="1" />
-                        <TextField prefHeight="25.0" prefWidth="285.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField prefHeight="25.0" prefWidth="285.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label styleClass="label-bright" text="undefined" GridPane.columnIndex="1">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
+                        <Label styleClass="label-bright" text="undefined" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
+                        <Label styleClass="label-bright" text="undefined" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
                      </children>
                   </GridPane>
                </children></AnchorPane>
