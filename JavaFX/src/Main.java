@@ -41,6 +41,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.onCloseRequestProperty(); // Call close method when closing window
         stage.setTitle("CORN");
+        stage.setResizable(false);
         stage.show();
     }
 }
