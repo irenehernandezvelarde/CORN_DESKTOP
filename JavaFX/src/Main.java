@@ -23,9 +23,9 @@ import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class Main extends Application {
-    public static int port = 3000;
-    public static String protocol = "http";
-    public static String host = "localhost";
+    public static int port = 443;
+    public static String protocol = "https";
+    public static String host = "corns-production.up.railway.app";
     public static String protocolWS = "ws";
     public static void main(String[] args) {
         // Iniciar app JavaFX   

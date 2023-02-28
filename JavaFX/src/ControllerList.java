@@ -48,6 +48,7 @@ public class ControllerList implements Initializable{
             if (objResponse.getString("status").equals("OK")) {
     
                 JSONArray JSONlist = objResponse.getJSONArray("result");
+                
 
                 // Add received consoles from the JSON to the yPane (VBox) list
                 for (int i = 0; i < JSONlist.length(); i++) {
