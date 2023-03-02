@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #A2EEF5;" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerTransactions">
+   <children>
+      <ScrollPane layoutX="200.0" layoutY="71.0" prefHeight="329.0" prefWidth="600.0" style="-fx-background-color: #85C1E9;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="71.0">
+         <content>
+            <VBox fx:id="vBoxList" style="-fx-background-color: #A2EEF5;" />
+         </content>
+      </ScrollPane>
+      <Label layoutX="87.0" layoutY="14.0" prefHeight="48.0" prefWidth="427.0" styleClass="label-header" text="Detalls de la Transacció">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -52,6 +52,11 @@ public class ControllerList implements Initializable{
     public ControllerList(){
     }
 
+    @FXML
+    private void setTransactionListView(){
+        UtilsViews.setViewAnimating("transactionList");
+    }
+
     private void loadListCallback (String response) {
 
         JSONObject objResponse = new JSONObject(response);

@@ -36,6 +36,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
 
         UtilsViews.addView(getClass(), "user", "./assets/userPane.fxml");
+        UtilsViews.addView(getClass(), "transactionList", "./assets/transactionView.fxml");
 
         Scene scene = new Scene(UtilsViews.parentContainer);
         stage.setScene(scene);
