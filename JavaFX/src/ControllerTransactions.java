@@ -61,9 +61,11 @@ public class ControllerTransactions implements Initializable{
                     Parent itemTemplate = loader.load();
                     ControllerListTransaction itemController = loader.getController();
                     itemController.setId(String.valueOf(transaction.getInt("id_transaction")));
-                    itemController.setOrigin(transaction.getString("origin"));
+                    if (!transaction.get("origin").equals(null) && !transaction.getString("TimeAccept").equals(null)){
+                        itemController.setOrigin(transaction.getString("origin"));
+                        itemController.setAcceptDate((String.valueOf(transaction.getString("TimeAccept"))));
+                    }
                     itemController.setDestiny(transaction.getString("destiny"));
-                    itemController.setAcceptDate((String.valueOf(transaction.getString("TimeAccept"))));
                     itemController.setQuantity((String.valueOf(transaction.getDouble("quantity"))));
                     itemController.setAccepted((String.valueOf(transaction.getInt("accepted"))));
                     vBoxList.getChildren().add(itemTemplate);

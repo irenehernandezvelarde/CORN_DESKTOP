@@ -20,16 +20,16 @@
                <children>
                   <TableView fx:id="userTable" prefHeight="498.0" prefWidth="275.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="firstNameColumn" prefWidth="83.0" text="Name" />
-                      <TableColumn fx:id="lastNameColumn" prefWidth="112.0" text="Last Name" />
-                        <TableColumn fx:id="phoneColumn" prefWidth="105.0" text="Telephone" />
+                      <TableColumn fx:id="firstNameColumn" prefWidth="83.0" text="Nom" />
+                      <TableColumn fx:id="lastNameColumn" prefWidth="112.0" text="Cognom" />
+                        <TableColumn fx:id="phoneColumn" prefWidth="105.0" text="Telefon" />
                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #A2EEF5;">
                <children>
-                  <Label layoutY="6.0" styleClass="label-header" text="User Details" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+                  <Label layoutY="6.0" styleClass="label-header" text="Detalls d'usuari" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
                      <font>
                         <Font size="31.0" />
                      </font>
@@ -47,7 +47,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label prefHeight="31.0" prefWidth="115.0" styleClass="label-bright" text="First Name:">
+                        <Label prefHeight="31.0" prefWidth="115.0" styleClass="label-bright" text="Nom:">
                            <font>
                               <Font size="21.0" />
                            </font>
@@ -55,12 +55,12 @@
                               <Insets />
                            </opaqueInsets>
                         </Label>
-                        <Label prefHeight="31.0" prefWidth="115.0" styleClass="label-bright" text="Last Name:" GridPane.rowIndex="1">
+                        <Label prefHeight="31.0" prefWidth="115.0" styleClass="label-bright" text="Cognom:" GridPane.rowIndex="1">
                            <font>
                               <Font size="21.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="31.0" prefWidth="115.0" styleClass="label-bright" text="Telephone:" GridPane.rowIndex="2">
+                        <Label prefHeight="31.0" prefWidth="115.0" styleClass="label-bright" text="Telefon:" GridPane.rowIndex="2">
                            <font>
                               <Font size="21.0" />
                            </font>

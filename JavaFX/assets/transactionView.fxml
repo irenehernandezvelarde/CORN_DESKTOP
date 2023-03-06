@@ -16,7 +16,7 @@
             <VBox fx:id="vBoxList" />
          </content>
       </ScrollPane>
-      <Label layoutX="187.0" layoutY="14.0" prefHeight="48.0" prefWidth="427.0" styleClass="label-header" text="Detalls de la Transacció">
+      <Label layoutX="187.0" layoutY="15.0" prefHeight="48.0" prefWidth="427.0" styleClass="label-header" text="Detalls de la Transacció">
          <font>
             <Font size="40.0" />
          </font>
