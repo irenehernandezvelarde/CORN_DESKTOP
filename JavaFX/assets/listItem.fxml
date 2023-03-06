@@ -1,26 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Polygon?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleMenuAction" prefHeight="50.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerListTransaction">
+<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleMenuAction" prefHeight="50.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerListTransaction">
    <children>
-      <Label fx:id="phone" layoutX="14.0" layoutY="12.0" prefHeight="27.0" prefWidth="77.0" text="ID" textFill="#8d8d8d" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="409.0" AnchorPane.topAnchor="12.0" />
-      <Label fx:id="quantity" layoutX="98.0" layoutY="14.0" minWidth="150.0" prefHeight="24.0" prefWidth="211.0" text="Transacció" textFill="#8d8d8d" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="98.0" AnchorPane.rightAnchor="191.0" />
+      <Label fx:id="phone" layoutX="14.0" layoutY="12.0" prefHeight="27.0" prefWidth="77.0" text="Origen" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="409.0" AnchorPane.topAnchor="12.0" />
+      <Label fx:id="quantity" layoutX="250.0" layoutY="14.0" minWidth="77.0" prefHeight="24.0" prefWidth="89.0" text="Transacció" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="161.0" />
       <Pane prefHeight="1.0" style="-fx-background-color: #aaaaaa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Label fx:id="acceptDate" layoutX="317.0" layoutY="14.0" prefHeight="24.0" prefWidth="167.0" text="Data" textFill="#8d8d8d" />
+      <Label fx:id="acceptDate" layoutX="344.0" layoutY="14.0" prefHeight="24.0" prefWidth="140.0" text="Data" />
+      <Label layoutX="114.0" layoutY="13.0" prefHeight="27.0" prefWidth="119.0" text="Destí" />
    </children>
    <cursor>
       <Cursor fx:constant="HAND" />

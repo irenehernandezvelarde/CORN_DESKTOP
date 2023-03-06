@@ -35,13 +35,13 @@ public class ControllerTransactions implements Initializable{
         vBoxList.getChildren().clear();
     
         JSONObject obj = new JSONObject("{}");
-        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/api/get_profiles", obj.toString(), (response) -> {
-
+        obj.put("type", "get_profiles");
+        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
             JSONObject objResponse = new JSONObject(response);
             if (objResponse.getString("status").equals("OK")) {
 
-                JSONArray JSONlist = objResponse.getJSONArray("profiles"); //Este devuelve un array de objetos json
-                URL resource = this.getClass().getResource("./src/userItemView.fxml");
+                JSONArray JSONlist = objResponse.getJSONArray("transactions"); //Este devuelve un array de objetos json
+                URL resource = this.getClass().getResource("./src/listItem.fxml");
 
                 for(int i = 0; i < JSONlist.length(); i++){ 
                     
@@ -51,27 +51,9 @@ public class ControllerTransactions implements Initializable{
                     System.out.println(user.getString("userName"));
 
                     try{
-                        // Load template and set controller
-                        FXMLLoader loader = new FXMLLoader(resource);
-                        Parent itemTemplate = loader.load();
-                        ControllerListTransaction userItemController = loader.getController();
-
-                        System.out.println(user.getString("userName"));
-                        System.out.println(user.getString("userLastName"));
-                        System.out.println(user.getString("userPhoneNumber"));
-                        System.out.println(user.getString("userStatus"));
-                        System.out.println(user.getString("userStatusModifyTime"));
-
-
-                        // Fill user item 
-                        userItemController.setOrigin(Transaction.getString("origin"));
-                        userItemController.setLastName(user.getString("userLastName"));
-                        userItemController.setPhoneNumber(user.getString("userPhoneNumber"));
-                        userItemController.setEmail(user.getString("userEmail"));
-                        userItemController.setBalance(user.getString("userBalance"));
-                        userItemController.setStatus(user.getString("userStatus"));
-                        userItemController.setLastStatusModified(dateFormat(user.getString("userStatusModifyTime")));
-                        vBoxList.getChildren().add(itemTemplate);
+                       
+                       
+                        
 
                     }catch(Exception e){
                         e.printStackTrace();
