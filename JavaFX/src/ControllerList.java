@@ -7,13 +7,17 @@ import org.json.JSONObject;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Alert.AlertType;
 
 public class ControllerList implements Initializable{
     @FXML
@@ -28,6 +32,12 @@ public class ControllerList implements Initializable{
 
     @FXML
     private Label firstNameLabel, lastNameLabel, phoneLabel, emailLabel, balanceLabel;
+
+    @FXML
+    private Button transactionButton;
+
+    Alert alert = new Alert(AlertType.ERROR);
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
@@ -49,12 +59,22 @@ public class ControllerList implements Initializable{
 
     }
 
-    public ControllerList(){
-    }
-
     @FXML
-    private void setTransactionListView(){
-        UtilsViews.setViewAnimating("transactionList");
+    private void setTransactionListView(ActionEvent event){
+        if (phoneLabel.getText().equals("nul") || phoneLabel.getText().equals("")){
+            alert.setHeaderText("Telefon de l'usuari no existeix");
+            alert.setContentText("El telefon de l'usuari seleccionat no existeix.");
+
+            alert.showAndWait();
+        }
+        else{
+            String sendPhone = phoneLabel.getText();
+            ControllerTransactions cl = (ControllerTransactions) UtilsViews.getController("transactionList");
+            cl.mostrarVista(sendPhone);
+
+            UtilsViews.setViewAnimating("transactionList");
+        }
+
     }
 
     private void loadListCallback (String response) {
@@ -72,7 +92,6 @@ public class ControllerList implements Initializable{
 
                 // Fill template with console information
                 User newUser = new User(user.getString("name"),user.getString("surname"),user.getInt("phone"), user.getString("email"),user.getDouble("balance"));
-                System.out.println(user);
                 userData.add(newUser);
                 userTable.setItems(userData);
             }
@@ -87,6 +106,7 @@ public class ControllerList implements Initializable{
             phoneLabel.setText(Integer.toString(user.getPhone()));
             emailLabel.setText(user.getEmail());
             balanceLabel.setText(Double.toString(user.getBalance()));
+            System.out.println(user);
         }else{
             firstNameLabel.setText("Undefined");
             lastNameLabel.setText("Undefined");

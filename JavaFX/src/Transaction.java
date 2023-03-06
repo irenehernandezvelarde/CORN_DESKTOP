@@ -8,15 +8,18 @@ import javafx.beans.property.StringProperty;
 public class Transaction {
     private StringProperty origin;
 
+    private StringProperty destiny;
+
     private IntegerProperty accepted;
 
     private DoubleProperty quantity;
 
     private StringProperty acceptDate;
 
-    public Transaction(String origin, String acceptDate,int accepted, Double quantity) {
+    public Transaction(String origin,String destiny, String acceptDate,int accepted, Double quantity) {
 		super();
 		this.origin = new SimpleStringProperty(origin);
+        this.destiny = new SimpleStringProperty(destiny);
 		this.acceptDate = new SimpleStringProperty(acceptDate);
 		this.accepted=new SimpleIntegerProperty(accepted);
         this.quantity = new SimpleDoubleProperty(quantity);
@@ -28,6 +31,14 @@ public class Transaction {
 
     public void setOrigin(String origin) {
         this.origin.set(origin);
+    }
+
+    public String getDestiny(){
+        return destiny.get();
+    }
+
+    public void setDestiny(String destiny){
+        this.destiny.set(destiny);
     }
 
     public String getAcceptDate() {
@@ -56,6 +67,9 @@ public class Transaction {
 
     public StringProperty originProperty() {
 		return this.origin;
+	}
+    public StringProperty destinyProperty() {
+		return this.destiny;
 	}
 	public StringProperty acceptDateProperty() {
 		return this.acceptDate;

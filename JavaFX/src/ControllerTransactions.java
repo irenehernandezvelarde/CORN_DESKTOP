@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressIndicator;
@@ -21,48 +22,66 @@ import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 public class ControllerTransactions implements Initializable{
-    
+
+    private String sendPhone = null;
+
     @FXML
     private VBox vBoxList = new VBox();
 
+    @FXML
+    private Button go_back;
+
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        vBoxList.getChildren().clear();
+    public void initialize(URL url, ResourceBundle rb) {
     }
 
-    private void getUsers(){
-
-        vBoxList.getChildren().clear();
-    
+    @FXML
+    public void loadTransactionList() {
         JSONObject obj = new JSONObject("{}");
-        obj.put("type", "get_profiles");
-        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
-            JSONObject objResponse = new JSONObject(response);
-            if (objResponse.getString("status").equals("OK")) {
+        obj.put("type", "get_transactions");
+        obj.put("phone", sendPhone);
 
-                JSONArray JSONlist = objResponse.getJSONArray("transactions"); //Este devuelve un array de objetos json
-                URL resource = this.getClass().getResource("./src/listItem.fxml");
-
-                for(int i = 0; i < JSONlist.length(); i++){ 
-                    
-                    // Get console information
-                    JSONObject user = JSONlist.getJSONObject(i);
-                    
-                    System.out.println(user.getString("userName"));
-
-                    try{
-                       
-                       
-                        
-
-                    }catch(Exception e){
-                        e.printStackTrace();
-                    }
-                }
-            }
-
+        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(),
+                (response) -> {
+                    loadTransactions(response);
         });
     }
 
-    
+    private void loadTransactions(String response) {
+        JSONObject objResponse = new JSONObject(response);
+        if (objResponse.getString("status").equals("OK")) {
+            JSONArray JSONlist = objResponse.getJSONArray("transactions");
+            URL resource = this.getClass().getResource("./assets/listItem.fxml");
+            vBoxList.getChildren().clear();
+            for (int i = 0; i < JSONlist.length(); i++) {
+                JSONObject transaction = JSONlist.getJSONObject(i);
+                System.out.println(transaction);
+                try {
+                    FXMLLoader loader = new FXMLLoader(resource);
+                    Parent itemTemplate = loader.load();
+                    ControllerListTransaction itemController = loader.getController();
+                    itemController.setId(String.valueOf(transaction.getInt("id_transaction")));
+                    itemController.setOrigin(transaction.getString("origin"));
+                    itemController.setDestiny(transaction.getString("destiny"));
+                    itemController.setAcceptDate((String.valueOf(transaction.getString("TimeAccept"))));
+                    itemController.setQuantity((String.valueOf(transaction.getDouble("quantity"))));
+                    itemController.setAccepted((String.valueOf(transaction.getInt("accepted"))));
+                    vBoxList.getChildren().add(itemTemplate);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }
+    }
+
+    @FXML
+    public void setUserDetailList(){
+        UtilsViews.setViewAnimating("user");
+    }
+
+    public void mostrarVista(String sendPhone){
+        this.sendPhone = sendPhone;
+        loadTransactionList();
+    }
 }
