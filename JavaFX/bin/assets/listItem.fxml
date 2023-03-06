@@ -6,19 +6,55 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleMenuAction" prefHeight="50.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerListTransaction">
+<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" onMouseClicked="#handleMenuAction" prefHeight="100.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerListTransaction">
    <children>
-      <Label fx:id="origin" layoutX="80.0" layoutY="12.0" prefHeight="27.0" prefWidth="126.0" text="Origen" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="494.0" AnchorPane.topAnchor="12.0" />
-      <Label fx:id="quantity" layoutX="360.0" layoutY="13.0" minWidth="77.0" prefHeight="24.0" prefWidth="96.0" text="Transacció" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="244.0" />
+      <Label fx:id="origin" layoutX="80.0" layoutY="62.0" prefHeight="27.0" prefWidth="118.0" text="Null" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="702.0" AnchorPane.topAnchor="62.0" />
+      <Label fx:id="quantity" layoutX="360.0" layoutY="13.0" minWidth="63.0" prefHeight="24.0" prefWidth="66.0" text="Null" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="360.0" AnchorPane.rightAnchor="474.0" />
       <Pane prefHeight="1.0" style="-fx-background-color: #aaaaaa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <Label fx:id="acceptDate" layoutX="560.0" layoutY="13.0" prefHeight="24.0" prefWidth="217.0" text="Data" />
-      <Label fx:id="destiny" layoutX="220.0" layoutY="12.0" prefHeight="27.0" prefWidth="134.0" text="Destí" />
-      <Label fx:id="id" layoutX="14.0" layoutY="7.0" prefHeight="36.0" prefWidth="55.0" text="ID">
+      <Label fx:id="acceptDate" layoutX="681.0" layoutY="63.0" prefHeight="24.0" prefWidth="196.0" text="Null" />
+      <Label fx:id="destiny" layoutX="210.0" layoutY="62.0" prefHeight="27.0" prefWidth="134.0" text="Null" />
+      <Label fx:id="id" layoutX="29.0" layoutY="57.0" prefHeight="36.0" prefWidth="34.0" text="Null">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Label fx:id="accepted" layoutX="464.0" layoutY="13.0" prefHeight="24.0" prefWidth="70.0" text="Acceptada" />
+      <Label fx:id="accepted" layoutX="628.0" layoutY="64.0" prefHeight="24.0" prefWidth="11.0" text="0" />
+      <Label fx:id="createData" layoutX="436.0" layoutY="64.0" prefHeight="24.0" prefWidth="174.0" text="Null" />
+      <Label layoutX="19.0" layoutY="14.0" text="ID">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </Label>
+      <Label layoutX="80.0" layoutY="22.0" prefHeight="24.0" prefWidth="96.0" text="Origen">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="210.0" layoutY="23.0" prefHeight="24.0" prefWidth="55.0" text="Destí">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="455.0" layoutY="26.0" text="Data creada">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="599.0" layoutY="26.0" text="Acceptada">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="344.0" layoutY="25.0" text="Transacció">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="681.0" layoutY="26.0" text="Data Acceptada">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
    <cursor>
       <Cursor fx:constant="HAND" />

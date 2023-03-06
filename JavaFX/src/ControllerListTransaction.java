@@ -4,7 +4,7 @@ import javafx.scene.shape.Polygon;
 
 public class ControllerListTransaction {
     @FXML
-    private Label id, origin, destiny, quantity, accepted, acceptDate;
+    private Label id, origin, destiny, quantity, createData, accepted, acceptDate;
 
     @FXML
     private void handleMenuAction() {
@@ -26,6 +26,10 @@ public class ControllerListTransaction {
 
     public void setQuantity(String quantity) {
         this.quantity.setText(quantity);
+    }
+
+    public void setCreateData(String createData) {
+        this.createData.setText(createData);
     }
 
     public void setAccepted(String accepted){

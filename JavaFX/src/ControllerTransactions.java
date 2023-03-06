@@ -61,7 +61,10 @@ public class ControllerTransactions implements Initializable{
                     Parent itemTemplate = loader.load();
                     ControllerListTransaction itemController = loader.getController();
                     itemController.setId(String.valueOf(transaction.getInt("id_transaction")));
-                    if (!transaction.get("origin").equals(null) && !transaction.getString("TimeAccept").equals(null)){
+                    if (!transaction.getString("TimeSetup").equals(null)){
+                        itemController.setCreateData((String.valueOf(transaction.getString("TimeSetup"))));
+                    }
+                    else if (!transaction.get("origin").equals(null) && !transaction.getString("TimeAccept").equals(null)){
                         itemController.setOrigin(transaction.getString("origin"));
                         itemController.setAcceptDate((String.valueOf(transaction.getString("TimeAccept"))));
                     }
