@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import org.json.JSONArray;
@@ -14,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -34,7 +36,10 @@ public class ControllerList implements Initializable{
     private Label firstNameLabel, lastNameLabel, phoneLabel, emailLabel, balanceLabel;
 
     @FXML
-    private Button transactionButton;
+    private Button transactionButton,estatButton,saldosButton,nTransaccionsButton,endavant;
+
+    @FXML
+    private ChoiceBox<String> choiceFiltres;
 
     Alert alert = new Alert(AlertType.ERROR);
 
@@ -56,7 +61,18 @@ public class ControllerList implements Initializable{
             loadListCallback(response);
         });
         userTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserDetails(newValue));
-
+        estatButton.setOnMouseClicked(event -> {
+            setFiltres("estat");
+        });
+        saldosButton.setOnMouseClicked(event -> {
+            setFiltres("saldos");
+        });
+        nTransaccionsButton.setOnMouseClicked(event -> {
+            setFiltres("nTransaccions");
+        });
+        endavant.setOnMouseClicked(event ->{
+            filtrar(choiceFiltres.getSelectionModel().getSelectedItem());
+        });
     }
 
     @FXML
@@ -114,5 +130,62 @@ public class ControllerList implements Initializable{
             emailLabel.setText("Undefined");
             balanceLabel.setText("Undefined");
         }
+    }
+
+    @FXML
+    private void setFiltres(String filtre){
+        ArrayList<String> arrFiltres = new ArrayList<>();
+        if(filtre.equalsIgnoreCase("estat")){
+            arrFiltres.add("NO_VERIFICAT");
+            arrFiltres.add("PER_VERIFICAR");
+            arrFiltres.add("ACCEPTAT");
+            arrFiltres.add("REBUTJAT");
+            choiceFiltres.getItems().clear();
+            choiceFiltres.getItems().addAll(arrFiltres);
+            choiceFiltres.setValue(arrFiltres.get(0));
+        }
+        else if(filtre.equalsIgnoreCase("saldos")){
+            arrFiltres.add("0");
+            arrFiltres.add("1-10");
+            arrFiltres.add("10-50");
+            arrFiltres.add("50-100");
+            arrFiltres.add("+100");
+            choiceFiltres.getItems().clear();
+            choiceFiltres.getItems().addAll(arrFiltres);
+            choiceFiltres.setValue(arrFiltres.get(0));
+        }
+        else if(filtre.equalsIgnoreCase("nTransaccions")){
+            arrFiltres.add("0");
+            arrFiltres.add("1-5");
+            arrFiltres.add("5-10");
+            arrFiltres.add("10-50");
+            arrFiltres.add("+50");
+            choiceFiltres.getItems().clear();
+            choiceFiltres.getItems().addAll(arrFiltres);
+            choiceFiltres.setValue(arrFiltres.get(0));
+        }
+    }
+    @FXML
+    private void filtrar(String tipusFiltre){
+        if(tipusFiltre==null){
+            System.out.println("ERROR");
+        }
+        else{
+            userTable.getItems().clear();
+            firstNameColumn.setCellValueFactory(
+            cellData -> cellData.getValue().firstNameProperty());
+            lastNameColumn.setCellValueFactory(
+            cellData -> cellData.getValue().lastNameProperty());
+            phoneColumn.setCellValueFactory(
+            cellData -> cellData.getValue().phoneProperty());
+            JSONObject obj = new JSONObject("{}");
+            obj.put("type", "filtrar");
+            obj.put("filtre",tipusFiltre);
+
+            UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
+                loadListCallback(response);
+            });
+            userTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserDetails(newValue));
+            }
     }
 }
