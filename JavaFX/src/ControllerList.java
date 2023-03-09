@@ -17,8 +17,10 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 
 public class ControllerList implements Initializable{
@@ -33,7 +35,7 @@ public class ControllerList implements Initializable{
     private ObservableList<User> userData = FXCollections.observableArrayList();
 
     @FXML
-    private Label firstNameLabel, lastNameLabel, phoneLabel, emailLabel, balanceLabel;
+    private Label firstNameLabel, lastNameLabel, phoneLabel, emailLabel, balanceLabel,labelMinMax;
 
     @FXML
     private Button transactionButton,estatButton,saldosButton,nTransaccionsButton,endavant;
@@ -41,6 +43,10 @@ public class ControllerList implements Initializable{
     @FXML
     private ChoiceBox<String> choiceFiltres;
 
+    @FXML
+    private TextField numMin,numMax;
+
+    private String filterType="";
     Alert alert = new Alert(AlertType.ERROR);
 
     @Override
@@ -62,16 +68,29 @@ public class ControllerList implements Initializable{
         });
         userTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserDetails(newValue));
         estatButton.setOnMouseClicked(event -> {
+            filterType="estat";
             setFiltres("estat");
         });
         saldosButton.setOnMouseClicked(event -> {
+            filterType="saldos";
             setFiltres("saldos");
         });
         nTransaccionsButton.setOnMouseClicked(event -> {
+            filterType="nTransaccions";
             setFiltres("nTransaccions");
         });
         endavant.setOnMouseClicked(event ->{
-            filtrar(choiceFiltres.getSelectionModel().getSelectedItem());
+            if(filterType.equalsIgnoreCase("estat")){
+                filtrar(choiceFiltres.getSelectionModel().getSelectedItem());
+            }
+            else if(filterType.equalsIgnoreCase("saldos")||filterType.equalsIgnoreCase("nTransaccions")){
+                filtrar("altre");
+            }
+            else{
+                alert.setHeaderText("Error");
+                alert.setContentText("Escull un filtre");
+                alert.showAndWait();
+            }
         });
     }
 
@@ -136,6 +155,10 @@ public class ControllerList implements Initializable{
     private void setFiltres(String filtre){
         ArrayList<String> arrFiltres = new ArrayList<>();
         if(filtre.equalsIgnoreCase("estat")){
+            choiceFiltres.setVisible(true);
+            numMin.setVisible(false);
+            numMax.setVisible(false);
+            labelMinMax.setVisible(false);
             arrFiltres.add("NO_VERIFICAT");
             arrFiltres.add("PER_VERIFICAR");
             arrFiltres.add("ACCEPTAT");
@@ -145,16 +168,25 @@ public class ControllerList implements Initializable{
             choiceFiltres.setValue(arrFiltres.get(0));
         }
         else if(filtre.equalsIgnoreCase("saldos")){
-            arrFiltres.add("0");
+            choiceFiltres.setVisible(false);
+            numMin.setVisible(true);
+            numMax.setVisible(true);
+            labelMinMax.setVisible(true);
+            /*arrFiltres.add("0");
             arrFiltres.add("1-10");
             arrFiltres.add("10-50");
             arrFiltres.add("50-100");
             arrFiltres.add("+100");
             choiceFiltres.getItems().clear();
             choiceFiltres.getItems().addAll(arrFiltres);
-            choiceFiltres.setValue(arrFiltres.get(0));
+            choiceFiltres.setValue(arrFiltres.get(0));*/
         }
         else if(filtre.equalsIgnoreCase("nTransaccions")){
+            choiceFiltres.setVisible(false);
+            numMin.setVisible(true);
+            numMax.setVisible(true);
+            labelMinMax.setVisible(true);
+            /* 
             arrFiltres.add("0");
             arrFiltres.add("1-5");
             arrFiltres.add("5-10");
@@ -162,15 +194,12 @@ public class ControllerList implements Initializable{
             arrFiltres.add("+50");
             choiceFiltres.getItems().clear();
             choiceFiltres.getItems().addAll(arrFiltres);
-            choiceFiltres.setValue(arrFiltres.get(0));
+            choiceFiltres.setValue(arrFiltres.get(0));*/
         }
     }
     @FXML
-    private void filtrar(String tipusFiltre){
-        if(tipusFiltre==null){
-            System.out.println("ERROR");
-        }
-        else{
+    private void filtrar(String filtreEscollit){
+        if(filterType.equalsIgnoreCase("estat")){
             userTable.getItems().clear();
             firstNameColumn.setCellValueFactory(
             cellData -> cellData.getValue().firstNameProperty());
@@ -180,12 +209,41 @@ public class ControllerList implements Initializable{
             cellData -> cellData.getValue().phoneProperty());
             JSONObject obj = new JSONObject("{}");
             obj.put("type", "filtrar");
-            obj.put("filtre",tipusFiltre);
+            obj.put("tipusFiltre",filterType);
+            obj.put("filtre",filtreEscollit);
 
             UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
                 loadListCallback(response);
             });
             userTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserDetails(newValue));
+        }
+        else{
+            try{
+                Integer.parseInt(numMin.getText());
+                Integer.parseInt(numMax.getText());
+                userTable.getItems().clear();
+                firstNameColumn.setCellValueFactory(
+                cellData -> cellData.getValue().firstNameProperty());
+                lastNameColumn.setCellValueFactory(
+                cellData -> cellData.getValue().lastNameProperty());
+                phoneColumn.setCellValueFactory(
+                cellData -> cellData.getValue().phoneProperty());
+                JSONObject obj = new JSONObject("{}");
+                obj.put("type", "filtrar");
+                obj.put("tipusFiltre",filterType);
+                obj.put("min",numMin.getText());
+                obj.put("max",numMax.getText());
+                UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
+                    loadListCallback(response);
+                });
+                userTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserDetails(newValue));
+            
             }
+            catch(Exception e){
+                alert.setHeaderText("Error");
+                alert.setContentText("Introdueix valor numerics");
+                alert.showAndWait();
+            }
+        }
     }
 }
