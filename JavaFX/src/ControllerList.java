@@ -219,25 +219,39 @@ public class ControllerList implements Initializable{
         }
         else{
             try{
-                Integer.parseInt(numMin.getText());
-                Integer.parseInt(numMax.getText());
-                userTable.getItems().clear();
-                firstNameColumn.setCellValueFactory(
-                cellData -> cellData.getValue().firstNameProperty());
-                lastNameColumn.setCellValueFactory(
-                cellData -> cellData.getValue().lastNameProperty());
-                phoneColumn.setCellValueFactory(
-                cellData -> cellData.getValue().phoneProperty());
-                JSONObject obj = new JSONObject("{}");
-                obj.put("type", "filtrar");
-                obj.put("tipusFiltre",filterType);
-                obj.put("min",numMin.getText());
-                obj.put("max",numMax.getText());
-                UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
-                    loadListCallback(response);
-                });
-                userTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserDetails(newValue));
-            
+                if(Integer.parseInt(numMin.getText())>Integer.parseInt(numMax.getText())){
+                        alert.setHeaderText("Error");
+                        alert.setContentText("El numero de l'esquerra ha de ser menor");
+                        alert.showAndWait();
+                }
+                else{
+                    try{
+                        Integer.parseInt(numMin.getText());
+                        Integer.parseInt(numMax.getText());
+                        userTable.getItems().clear();
+                        firstNameColumn.setCellValueFactory(
+                        cellData -> cellData.getValue().firstNameProperty());
+                        lastNameColumn.setCellValueFactory(
+                        cellData -> cellData.getValue().lastNameProperty());
+                        phoneColumn.setCellValueFactory(
+                        cellData -> cellData.getValue().phoneProperty());
+                        JSONObject obj = new JSONObject("{}");
+                        obj.put("type", "filtrar");
+                        obj.put("tipusFiltre",filterType);
+                        obj.put("min",numMin.getText());
+                        obj.put("max",numMax.getText());
+                        UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(), (response) -> {
+                            loadListCallback(response);
+                        });
+                        userTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserDetails(newValue));
+                    
+                    }
+                    catch(Exception e){
+                        alert.setHeaderText("Error");
+                        alert.setContentText("Introdueix valor numerics");
+                        alert.showAndWait();
+                    }
+                }
             }
             catch(Exception e){
                 alert.setHeaderText("Error");
