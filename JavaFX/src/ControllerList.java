@@ -38,7 +38,7 @@ public class ControllerList implements Initializable{
     private Label firstNameLabel, lastNameLabel, phoneLabel, emailLabel, balanceLabel,labelMinMax;
 
     @FXML
-    private Button transactionButton,estatButton,saldosButton,nTransaccionsButton,endavant;
+    private Button transactionButton,estatButton,saldosButton,nTransaccionsButton,endavant, verificationViewButton;
 
     @FXML
     private ChoiceBox<String> choiceFiltres;
@@ -92,6 +92,22 @@ public class ControllerList implements Initializable{
                 alert.showAndWait();
             }
         });
+    }
+
+    @FXML
+    private void setVerificarionView(){
+        if (phoneLabel.getText().equals("nul") || phoneLabel.getText().equals("")){
+            alert.setHeaderText("Telefon de l'usuari no existeix");
+            alert.setContentText("El telefon de l'usuari seleccionat no existeix.");
+
+            alert.showAndWait();
+        }
+        else{
+            String sendPhone = phoneLabel.getText();
+            ControllerUserVerification cl = (ControllerUserVerification) UtilsViews.getController("userVerification");
+            cl.mostrarVista(sendPhone);
+        }
+        UtilsViews.setViewAnimating("userVerification");
     }
 
     @FXML
@@ -186,7 +202,7 @@ public class ControllerList implements Initializable{
             numMin.setVisible(true);
             numMax.setVisible(true);
             labelMinMax.setVisible(true);
-            /* 
+            /*
             arrFiltres.add("0");
             arrFiltres.add("1-5");
             arrFiltres.add("5-10");
@@ -244,7 +260,7 @@ public class ControllerList implements Initializable{
                             loadListCallback(response);
                         });
                         userTable.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> showUserDetails(newValue));
-                    
+
                     }
                     catch(Exception e){
                         alert.setHeaderText("Error");

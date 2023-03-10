@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #A2EEF5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerUserVerification">
+   <children>
+      <Label layoutX="260.0" layoutY="14.0" prefHeight="57.0" prefWidth="281.0" text="Verificació d'usuari">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="front_DNI" fitHeight="258.0" fitWidth="305.0" layoutX="95.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="50.0" />
+      <ImageView fx:id="back_DNI" fitHeight="258.0" fitWidth="305.0" layoutX="481.0" layoutY="108.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="50.0" />
+      <ComboBox fx:id="verification_state" layoutX="290.0" layoutY="419.0" prefHeight="38.0" prefWidth="222.0" />
+      <Button fx:id="go_back" layoutX="80.0" layoutY="24.0" mnemonicParsing="false" onAction="#setUserView" prefHeight="38.0" prefWidth="57.0" style="-fx-background-color: #FFFFFF;">
+         <graphic>
+            <ImageView fitHeight="35.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@go_back.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+   </children>
+</AnchorPane>
