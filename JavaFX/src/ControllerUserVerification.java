@@ -176,11 +176,7 @@ public class ControllerUserVerification implements Initializable{
             JSONArray JSONlist = objResponse.getJSONArray("result");
             for (int i = 0; i < JSONlist.length(); i++) {
                 JSONObject user = JSONlist.getJSONObject(i);
-                if (user.getString("state").equalsIgnoreCase("NO_VERIFICAT")){
-                    verification_state.getSelectionModel().select("NO_VERIFICAT");
-                }else{
-                    verification_state.getSelectionModel().select(user.getString("state"));
-                }
+                verification_state.getSelectionModel().select(user.getString("state"));
             }
 
         }
