@@ -37,6 +37,7 @@ public class Main extends Application {
 
         UtilsViews.addView(getClass(), "user", "./assets/userPane.fxml");
         UtilsViews.addView(getClass(), "transactionList", "./assets/transactionView.fxml");
+        UtilsViews.addView(getClass(), "userVerification", "./assets/userDetails.fxml");
 
         Scene scene = new Scene(UtilsViews.parentContainer);
         stage.setScene(scene);
