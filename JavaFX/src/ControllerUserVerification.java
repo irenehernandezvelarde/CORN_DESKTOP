@@ -5,6 +5,8 @@ import java.util.Base64;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -35,6 +37,7 @@ public class ControllerUserVerification implements Initializable{
     private Image defaultImage = new Image("./assets/noImage.png");
 
     private Alert alertBack = new Alert(AlertType.CONFIRMATION);
+    private Alert alertSave = new Alert(AlertType.INFORMATION);
 
     @FXML
     private Button go_back, saveState;
@@ -47,7 +50,7 @@ public class ControllerUserVerification implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        verification_state.getItems().addAll("NO_VERIFICAT", "PER_VERIFICAR", "ACCEPTAT", "REFUSAT");
+        verification_state.getItems().addAll("No_verificat", "Per_verificar", "Acceptat", "Rebutjat");
 
     }
 
@@ -59,28 +62,41 @@ public class ControllerUserVerification implements Initializable{
 
             Optional<ButtonType> result = alertBack.showAndWait();
             if (result.get() == ButtonType.OK){
-                System.out.println("ENTRO");
                 saveVerificate();
+
+            }else{
                 front_DNI.setImage(defaultImage);
                 back_DNI.setImage(defaultImage);
                 UtilsViews.setViewAnimating("user");
             }
+        }else{
+            front_DNI.setImage(defaultImage);
+            back_DNI.setImage(defaultImage);
+            UtilsViews.setViewAnimating("user");
         }
     }
 
     @FXML
     public void saveStateDrop(){
         current = verification_state.getSelectionModel().getSelectedItem();
-        System.out.println("CURRENT = "+current);
-        System.out.println("INITIAL = "+initial);
-
     }
 
     @FXML
     public void saveVerificate(){
-        front_DNI.setImage(defaultImage);
-        back_DNI.setImage(defaultImage);
-        UtilsViews.setViewAnimating("user");
+        if (!initial.equals(current)){
+            JSONObject obj = new JSONObject("{}");
+            obj.put("type", "modifyState");
+            obj.put("phone", sendPhone);
+            obj.put("state", current);
+
+            UtilsHTTP.sendPOST(Main.protocol + "://" + Main.host + ":" + Main.port + "/dades", obj.toString(),
+                (response) -> {
+            });
+            initial = verification_state.getSelectionModel().getSelectedItem();
+            alertSave.setHeaderText(null);
+            alertSave.setContentText("El nou estat del usuari s'ha guardat correctament!");
+            alertSave.showAndWait();
+        }
     }
 
     @FXML
@@ -160,7 +176,6 @@ public class ControllerUserVerification implements Initializable{
             JSONArray JSONlist = objResponse.getJSONArray("result");
             for (int i = 0; i < JSONlist.length(); i++) {
                 JSONObject user = JSONlist.getJSONObject(i);
-                System.out.println(user.getString("state"));
                 if (user.getString("state").equalsIgnoreCase("NO_VERIFICAT")){
                     verification_state.getSelectionModel().select("NO_VERIFICAT");
                 }else{
