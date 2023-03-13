@@ -105,9 +105,10 @@ public class ControllerList implements Initializable{
         else{
             String sendPhone = phoneLabel.getText();
             ControllerUserVerification cl = (ControllerUserVerification) UtilsViews.getController("userVerification");
-            cl.mostrarVista(sendPhone);
+            cl.mostrarVerification(sendPhone);
+            UtilsViews.setViewAnimating("userVerification");
+
         }
-        UtilsViews.setViewAnimating("userVerification");
     }
 
     @FXML
